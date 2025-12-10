@@ -1,0 +1,55 @@
+# 本项目为金融数据分析课程相关测试代码
+
+## 项目简介
+
+适用班级：湖南科技大学商学院25级金融工程研究生
+作者：叶俊杰
+创建时间：2021年5月9日
+最后更新时间：2025年12月1日
+
+致谢：
+Hilpisch(希尔皮斯基): Python金融大数据分析（大部分代码的原始来源参考）
+段小手: 深入浅出Python量化交易实战（蜡烛图,基于KNN的简单交易策略两个部分有参考）
+
+## 项目依赖
+
+新版代码在[3.14.0]版本下测试通过，部分老版代码依赖python [3.9.5]
+
+### 项目可使用uv管理
+
+项目配置文件：[project.toml]
+
+```bash
+uv python install 3.14
+uv python pin 3.14
+uv sync
+uv lock
+```
+
+### 项目也可以使用Pip安装需要的包
+
+安装需要的包(项目的包依赖文件：[requirements.txt])
+
+```bash
+pip install numpy pandas matplotlib mplfinance scipy
+pip install pandas_datareader yfinance tushare jqdatasdk
+pip install scikit-learn statsmodels factor-analyzer
+
+# 为了提高安装速度，可在每条命令后添加 -i 以使用国内的pip源。如：
+pip install pandas -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+# 也可直接使用requirements.txt文件安装
+pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+#某些python版本下(如python3.9.5时), 如果执行yfinance时报错，可能需要调整urllib3包的版本
+pip install urllib3==1.25.11 
+```
+
+## 项目的Jupyter在线测试平台
+
+网址：[https://camp.okwords.cn/jr25]
+密码：Findata@2025
+
+## 课程知识思维导图
+
+![课程知识思维导图](fin-data-mind.png)
