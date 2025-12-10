@@ -83,7 +83,7 @@ def get_stock_data_ts(stock_code, start_date, end_date):
     :param end_date: 结束日期，格式为 'YYYY-MM-DD'
     :return: 指定时间段内的股票交易数据(DataFrame)
     """
-    pro = ts.pro_api('our_tushare_token')
+    pro = ts.pro_api('your_tushare_token')
     # API-key来自不易，有次数限制，请同学们自己去tushare申请自己的API-key并替换上面的字符串
         # 如果soock_code是以.SZ或.SH结尾，则分别替换成.ss或.sz
     if stock_code.endswith('.sz'):

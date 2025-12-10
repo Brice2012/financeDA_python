@@ -11,7 +11,7 @@ import statsmodels.api as sm
 
 ## 获取相关全局参数
 # 初始化pro接口(请个人去tushare官网免费申请自用的token并替换)
-pro = ts.pro_api('our_tushare_token')
+pro = ts.pro_api('your_tushare_token')
 
 def tsa(stock_code='000651.SZ', start_date='', end_date=''):
     if stock_code in [""," ",None]:

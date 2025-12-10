@@ -146,7 +146,7 @@ comp_list = dict(zip(symbols, comp_name))
 #%%
 # # 使用tushare获取多支股票的收盘数据并存入csv文件
 
-# pro = ts.pro_api('our_tushare_token')
+# pro = ts.pro_api('your_tushare_token')
 # start='20150101'
 # end=datetime.datetime.now().strftime('%Y%m%d')
 
