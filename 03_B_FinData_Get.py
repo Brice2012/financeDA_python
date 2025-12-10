@@ -146,7 +146,7 @@ import tushare as ts # 导入tushare
 # 新版本tushare接口使用(最简示例)
 
 ## 初始化pro接口
-pro = ts.pro_api('aac3815814723db39100bf3cecbb0b2b73144da433d708d77d1f4c5e')
+pro = ts.pro_api('your_tushare_token')
 # 免费token资源有限
 # 请同学们个人去tushare官网免费申请自用的token并替换
 
