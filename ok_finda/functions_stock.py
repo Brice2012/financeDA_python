@@ -5,7 +5,7 @@ import tushare as ts
 import math
 
 # 获取pkl格式股票数据
-def load_stock(stock_code, start_date, end_date, output_file, source='yf'):
+def load_stock_data(stock_code, start_date, end_date, output_file, source='yf'):
     """
     加载股票数据，先尝试从文件加载，若文件不存在则从指定源下载并保存。
     :param stock_code: 股票代码，如 '601318.SH'
@@ -40,7 +40,7 @@ def load_stock(stock_code, start_date, end_date, output_file, source='yf'):
     return df
 
 # 获取csv格式股票数据
-def load_stock_data(stock_code, start_date, end_date, output_file, source='yf'):
+def load_stock_csv(stock_code, start_date, end_date, output_file, source='yf'):
     """
     加载股票数据，先尝试从文件加载，若文件不存在则从指定源下载并保存。
     :param stock_code: 股票代码，如 '601318.SH'
@@ -152,7 +152,7 @@ def sum_return_ratio(price_list):
     # 公式 实际总收益率 = (price_t - price_t0) / price_t0
     price_list=price_list.to_numpy()
     return (price_list[-1]-price_list[0])/price_list[0]
-def MaxDrawdown(price_list):
+def max_draw_down(price_list):
     '''最大回撤率'''
     # 公式 最大回撤率 = (price_t - price_tmax) / price_tmax
     price_list=price_list.to_numpy()
@@ -167,12 +167,12 @@ def sharpe_ratio(price_list,rf=0.000041):
     # pct_change()是pandas里面的自带的计算每日增长率的函数
     daily_return = price_list.pct_change()
     return daily_return.mean()-rf/ daily_return.std()
-def Information_Ratio(price_list,rf=0.000041):
+def information_ratio(price_list,rf=0.000041):
     '''信息比率'''
     # 公式 信息比率 = (总回报率 - 无风险率) / 回报率的标准差
     chaoer=sum_return_ratio(price_list)-((1+rf)**365-1)
     return chaoer/np.std(price_list.pct_change()-rf)
-def Treynor_Ratio(price_list,beta,rf=0.000041):
+def treynor_ratio(price_list,beta,rf=0.000041):
     '''特雷诺比率'''
     # 公式 特雷诺比率 = (回报率均值 - 无风险率) /  beta
     daily_return = price_list.pct_change()
