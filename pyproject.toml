@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"  # 构建后端
 
 [project]
 name = "OK_FinDA"
-version = "0.1.0"
+version = "0.1.6"
 description = "financial data analysis by okwords.cn"
 readme = "README.md"
 requires-python = ">=3.13.5"
@@ -24,6 +24,9 @@ dependencies = [
     "factor-analyzer >=0.5.1",
     "pymysql >=1.1.2"
 ]
+
+[tool.setuptools.package-data]
+ok_finda = ["data/*.csv","data/*.pkl"]
 
 [[tool.uv.index]]
 url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"

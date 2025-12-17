@@ -17,7 +17,7 @@ def gen_paths(S0, r, sigma, T, M, I):
     return paths
 
 # 函数定义：输出数据集的统计指标，如均值、方差、偏度、峰度等
-def print_statistics(array):
+def stat_describe(array):
     sta = scs.describe(array)
     print("%14s %15s" % ('statistic', 'value'))
     print(30 * "-")
