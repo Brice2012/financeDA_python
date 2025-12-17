@@ -1,5 +1,12 @@
-### ch6. 投资组合优化
-###########################
+# ##################################################
+# ok_finda package 2.0
+# Financial Data Analysis - Portfolio Optimization
+# 金融数据分析 - 投资组合优化
+# Author: yejunjie@21cn.com
+# Date: 2025-12-17
+# ####################################################
+
+#投资组合优化
 
 # 导入相关的包
 # pip install numpy pandas yfinance matplotlib scipy statsmodels # 安装需要的包
@@ -10,12 +17,13 @@ import scipy.stats as scs
 import statsmodels.api as sm
 from .functions_stat import stat_describe, normality_tests, gen_paths
 
-# 定义股票代码列表(选前述多支股票分析例子中的四支股票)
+#设置默认样例数据
 from importlib.resources import files
 from importlib.resources.abc import Traversable
 data_dir: Traversable = files("ok_finda") / "data"
 csv_path: Traversable = data_dir / "stock_close_2025.csv"
 
+# 定义股票代码列表(选前述多支股票分析例子中的四支股票)
 symbols = ['600031.SH', '601138.SH', '000768.SZ', '600519.SH']
 data = pd.read_csv("csv_path", encoding="gbk", index_col=0, parse_dates=True)  # 从csv读取数据
 data_po = data[symbols].dropna()
