@@ -1,5 +1,5 @@
 # ##################################################
-# okfinance package 2.0
+# financeda package 2.0
 # Financial Data Analysis
 # 金融数据分析
 # Author: YeJunjie (Brice)
@@ -70,7 +70,7 @@ def ff_reg ( stocks:dict,  start_date:str, end_date:str, mode:int=3, factors: st
         three_factors = pd.read_csv(factors)[['trddy','mkt_rf','smb','hml','rmw','cma']].rename(columns={'trddy':'Date'}).set_index('Date')
     else:
         # 定位本地factors—CSV文件（适配安装后的路径）
-        data_dir: Traversable = files("okfinance") / "data"
+        data_dir: Traversable = files("financeDA") / "data"
         csv_path: Traversable = data_dir / "ff_5factors_daily.csv"
         three_factors = pd.read_csv(csv_path)[['trddy','mkt_rf','smb','hml','rmw','cma']].rename(columns={'trddy':'Date'}).set_index('Date')
             

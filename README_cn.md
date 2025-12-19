@@ -15,7 +15,7 @@ from financeDA.class_stock_data import StockData # 股票数据，[Close, High, 
 from financeDA.class_stock_po import StockPO  # 投资组合优化（股票）
 
 from financeDA import stat_describe, stat_norm_tests, stat_gen_paths  # 统计描述、正态性测试、生成随机路径
-from financeDA import plot_line, plot_candle, plot_hist, plot_QQ, stock_diff, stock_tsa, stock_tests # 可视化：折线图、蜡烛图、直方图、QQ图、股票收益率、股票时间序列分析、股票统计测试
+from financeDA import stock_diff, stock_tsa, stock_tests # 股票收益率、股票时间序列分析、股票统计测试
 from financeDA import ff_reg   # 因子数据回归分析
 from financeDA import gbm_mcs_stat, gbm_mcs_dyna, gbm_mcs_amer, option_premium # 期权定价相关：GBM模型静态模拟、动态模拟、美式期权模拟、期权溢价
 from financeDA import bsm_call_imp_vol, bsm_call_value, bsm_vega  # 期权定价相关：BSM模型隐含波动率、期权价值、期权Vega
@@ -44,15 +44,10 @@ pip install financeDA
 
 ```python
 from financeDA.class_stock_data import StockData # 股票数据，[Close, High, Low, Open, Volume] 及主要扩展指标[Diff, Signal, Close_Open, Returns, Log_Returns, 42d, 252d, Mov_Vol等]
-from financeDA import plot_line, plot_candle, plot_hist, plot_QQ, stock_diff, stock_tsa, stock_tests # 可视化：折线图、蜡烛图、直方图、QQ图、股票收益率、股票时间序列分析、股票统计测试
+from financeDA import stock_diff, stock_tsa, stock_tests # 股票收益率、股票时间序列分析、股票统计测试
 
 df_stock = StockData("BABA", start="2020-01-01", end="2025-12-20", source="yfinance").DF
 print(df_stock.head())
-
-plot_line(df_stock["Close"])
-plot_candle(df_stock[-21:0])
-plot_hist(df_stock["Returns"])
-plot_QQ(df_stock["Log_Returns"])
 
 stock_diff(df_stock)
 stock_tsa(df_stock)

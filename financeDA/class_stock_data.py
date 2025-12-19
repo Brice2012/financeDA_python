@@ -1,5 +1,5 @@
 # ##################################################
-# okfinance package 2.0
+# financeda package 2.0
 # Financial Data Analysis
 # 金融数据分析
 # Author: YeJunjie (Brice)
@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 import yfinance as yf
 import tushare as ts
-import math
+import math, os
 from datetime import datetime
 
 class StockData(object):
@@ -50,10 +50,10 @@ class StockData(object):
             print("未指定有效样本数据，请从['BABA','000651.SZ']中选择")
             return False
         if sample in ['baba','BABA','阿里巴巴','阿里']:
-            data_dir_baba: Traversable = files("okfinance") / "data" / "stock_BABA_19900101_20251219.csv"  #阿里巴巴
+            data_dir_baba: Traversable = files("financeDA") / "data" / "stock_BABA_19900101_20251219.csv"  #阿里巴巴
             df = pd.read_csv(data_dir_baba)
         if sample in ['gl','000651','000651.sz','000651.SZ', '格力电器', '格力']:        
-            data_dir_000651: Traversable = files("okfinance") / "data" / "stock_000651_19900101_20251219.csv" #格力电器
+            data_dir_000651: Traversable = files("financeDA") / "data" / "stock_000651_19900101_20251219.csv" #格力电器
             df = pd.read_csv(data_dir_000651)
             
         df['Date'] = pd.to_datetime(df['Date'])
@@ -83,6 +83,16 @@ class StockData(object):
         # 首先让程序尝试读取已下载并保存的文件
         try:
             df = pd.read_csv(csv_file)
+            if df.empty:
+                print(f'文件 {csv_file} 为空，重新下载中')
+                os.remove(csv_file)
+                if source == 'tushare':
+                    if token is None:
+                        print(f'未指定tushare token，无法从tushare下载股票数据 {stock_code}')
+                        raise ValueError("tushare数据源需要指定token")
+                    df = self.get_stock_data_ts(stock_code, start_date, end_date)
+                else:
+                    df = self.get_stock_data_yf(stock_code, start_date, end_date)
             df['Date'] = pd.to_datetime(df['Date'])
             df.set_index('Date', inplace=True)
             #如果文件已存在，则打印载入股票数据文件完毕
@@ -108,6 +118,9 @@ class StockData(object):
                 df.to_csv(csv_file)
                 #通知下载完成
                 print(f'成功将数据保存到文件 {csv_file}')
+        except Exception as e:
+            print(f'下载股票数据 {stock_code} 时出错：{e}')
+            raise ValueError(f"下载股票数据 {stock_code} 时出错：{e}")
         #最后将下载的数据表进行返回
         self.DF = df
         return df

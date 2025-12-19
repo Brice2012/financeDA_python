@@ -1,5 +1,5 @@
 # ##################################################
-# okfinance package 2.0
+# financeda package 2.0
 # Financial Data Analysis
 # 金融数据分析
 # Author: YeJunjie (Brice)
@@ -17,41 +17,6 @@ from .functions_stat import stat_describe, stat_norm_tests
 
 plt.rcParams["font.family"] = ["SimHei"]  # 多字体兜底，适配不同系统
 plt.rcParams["axes.unicode_minus"] = False  # 解决负号显示为方块的问题
-
-def plot_line(arr, png_file='stock_line.png'):
-    ## 绘制股票的折线图
-    mpf.plot(arr, type='line', style='charles', title='Line Plot of Sotck Price', ylabel='Price')
-    plt.savefig(png_file)
-    plt.show()
-    return png_file
-
-def plot_candle(data, png_file='stock_candle.png'):
-    ## 绘制股票的蜡烛图(最近21天)
-    if len(data) > 21:
-        data = data.copy()[-21:]
-    # data['Date'] = pd.to_datetime(data['Date'])
-    # data.set_index('Date', inplace=True)
-    mpf.plot(data, type='candle', style='charles', title='Candle Plot of Stock Price', ylabel='Price')
-    # 保存图片
-    plt.savefig(png_file)
-    plt.show()
-    return png_file
-
-def plot_hist(arr, png_file='stock_hist.png'):
-    plt.hist(arr, bins=50)
-    plt.title('Histogram of Stock Returns')
-    plt.xlabel('Stock Returns')
-    plt.ylabel('Frequency')
-    plt.savefig(png_file)
-    plt.show()
-    return png_file
-
-def plot_QQ(arr, png_file='stock_QQ.png'):
-    sm.qqplot(arr, line='s')
-    plt.title('QQ Plot of Stock Returns')
-    plt.savefig(png_file)
-    plt.show()
-    return png_file
 
 def stock_diff(data, png_file='stock_diff.png'):
     ## 绘制股票的价格差折线图

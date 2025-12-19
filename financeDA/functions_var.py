@@ -1,5 +1,5 @@
 # ##################################################
-# okfinance package 2.0
+# financeda package 2.0
 # Financial Data Analysis - Risk Measures
 # 金融数据分析 - 风险测度 
 # Author: YeJunjie (Brice)

@@ -1,5 +1,5 @@
 # ##################################################
-# okfinance package 2.0
+# financeda package 2.0
 # Financial Data Analysis
 # 金融数据分析
 # Author: YeJunjie (Brice)

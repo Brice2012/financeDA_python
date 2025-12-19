@@ -16,7 +16,7 @@ from financeDA.class_stock_data import StockData # Stock data including [Close, 
 from financeDA.class_stock_po import StockPO  # Stock portfolio optimization
 
 from financeDA import stat_describe, stat_norm_tests, stat_gen_paths  # Statistical description, normality tests, random path generation
-from financeDA import plot_line, plot_candle, plot_hist, plot_QQ, stock_diff, stock_tsa, stock_tests # Visualization: line charts, candlestick charts, histograms, QQ plots, stock return analysis, stock time series analysis, stock statistical tests
+from financeDA import stock_diff, stock_tsa, stock_tests # Visualization: line charts, candlestick charts, histograms, QQ plots, stock return analysis, stock time series analysis, stock statistical tests
 from financeDA import ff_reg   # Factor data regression analysis
 from financeDA import gbm_mcs_stat, gbm_mcs_dyna, gbm_mcs_amer, option_premium # Option pricing related: GBM model static simulation, dynamic simulation, American option simulation, option premium calculation
 from financeDA import bsm_call_imp_vol, bsm_call_value, bsm_vega  # Option pricing related: BSM model implied volatility, option value, option Vega
@@ -44,15 +44,10 @@ pip install financeDA
 
 ```python
 from financeDA.class_stock_data import StockData # Stock data including [Close, High, Low, Open, Volume] and key extended indicators [Diff, Signal, Close_Open, Returns, Log_Returns, 42d, 252d, Mov_Vol, etc.]
-from financeDA import plot_line, plot_candle, plot_hist, plot_QQ, stock_diff, stock_tsa, stock_tests # Visualization: line charts, candlestick charts, histograms, QQ plots, stock return analysis, stock time series analysis, stock statistical tests
+from financeDA import stock_diff, stock_tsa, stock_tests # stock return analysis, stock time series analysis, stock statistical tests
 
 df_stock = StockData("BABA", start="2020-01-01", end="2025-12-20", source="yfinance").DF
 print(df_stock.head())
-
-plot_line(df_stock["Close"])
-plot_candle(df_stock[-21:0])
-plot_hist(df_stock["Returns"])
-plot_QQ(df_stock["Log_Returns"])
 
 stock_diff(df_stock)
 stock_tsa(df_stock)

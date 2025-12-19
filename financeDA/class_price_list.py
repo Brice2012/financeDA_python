@@ -1,5 +1,5 @@
 # ##################################################
-# okfinance package 2.0
+# financeda package 2.0
 # Financial Data Analysis
 # 金融数据分析
 # Author: YeJunjie (Brice)
@@ -43,7 +43,7 @@ class PriceList(object):
         from importlib.resources.abc import Traversable
         try:
             # 定位样例BABA的数据文件（适配安装后的路径）
-            data_dir: Traversable = files("okfinance") / "data"
+            data_dir: Traversable = files("financeDA") / "data"
             csv_path: Traversable = data_dir / "stock_BABA.csv"
             print(csv_path)
             price_list = pd.read_csv(csv_path)['Close']

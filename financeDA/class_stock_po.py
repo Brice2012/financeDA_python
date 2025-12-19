@@ -1,5 +1,5 @@
 # ##################################################
-# okfinance package 2.0
+# financeda package 2.0
 # Financial Data Analysis - Portfolio Optimization
 # 金融数据分析 - 投资组合优化
 # Author: YeJunjie (Brice)
@@ -91,7 +91,7 @@ class StockPO(object):
         self.symbols = list(self.stocks.keys())
         self.names = list(self.stocks.values())
         try:
-            data_dir: Traversable = files("okfinance") / "data"
+            data_dir: Traversable = files("financeDA") / "data"
             csv_path: Traversable = data_dir / "stock_close_2025.csv"
             data = pd.read_csv(csv_path, encoding="gbk", index_col=0, parse_dates=True)[self.symbols]  # 从csv读取数据
             self.data = data.dropna()
@@ -114,10 +114,18 @@ class StockPO(object):
         try:
             data =pd.DataFrame()
             for symbol in symbols:
-                data[symbol] = StockData(stock_code=symbol, source=source, token=token).DF['Close']
+                dff_ = StockData(stock_code=symbol, source=source, token=token).DF['Close']
+                if len(dff_) == 0:
+                    dff_ = StockData(stock_code=symbol, source=source, token=token).DF['Close']
+                if len(dff_) > 0:
+                    data[symbol] = dff_
+                else:
+                    print(f'股票 {symbol} 数据为空, 去掉该支股票')
+                    self.symbols.remove(symbol)
+                    self.names.remove(self.stocks[symbol])
+            self.data = data.dropna()
             if save:
                 data.to_csv(f"stock_po.csv", index=True)
-            self.data = data.dropna()
             self.noa = len(self.symbols)
             self.rets = np.log(self.data / self.data.shift(1))
             self.mean_rets = self.rets.mean() * 252

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"  # 构建后端
 
 [project]
 name = "financeDA"
-version = "0.2.2"
+version = "0.3.1"
 description = "financial data analysis by brice."
 readme = "README.md"
 requires-python = ">=3.13.5"
@@ -26,4 +26,4 @@ dependencies = [
 ]
 
 [tool.setuptools.package-data]
-ok_finda = ["data/*.csv","data/*.pkl"]
+financeDA = ["data/*.csv","data/*.pkl"]
