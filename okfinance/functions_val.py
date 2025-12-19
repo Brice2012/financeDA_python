@@ -138,7 +138,7 @@ def gbm_mcs_amer(K, option='call'):
 # print("美式期权:行权价K=110时看涨(%.4f)和看跌（%.4f)期权的价格估算"%(a1,a2))
 
 # 估算期权溢价（美式期权与欧式期权的差价）
-def opt_premium_euro_amer(k_list=np.arange(80., 120.1, 5.), option='put'):
+def option_premium(k_list=np.arange(80., 120.1, 5.), option='put'):
     euro_res = []
     amer_res = []
     # k_list = np.arange(80., 120.1, 5.) # strike price list; 行权价列表

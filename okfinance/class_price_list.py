@@ -1,73 +1,109 @@
 import numpy as np
 import pandas as pd
-import yfinance as yf
-import tushare as ts
 import math
-from datetime import datetime
 
 class PriceList(object):
-    """ 股票数据及基本处理 """
+    """ 股票数据(Close price)及基本处理 """
 
-    def __init__(self, price_list: pd.Series, *args, **kwargs):
+    def __init__(self, price_list: pd.Series = None):
         """
         :param price_list: 股票价格序列
         """
-        self.price_list = price_list
-        self.Daily_Return_Ratio = self.daily_return_ratio(price_list)
-        self.Daily_Return_Ratio_Log = self.daily_return_ratio_log(price_list)
+        super(PriceList, self).__init__()
+        self.sprice_list: pd.Series = pd.Series()
+        self.Daily_Return_Ratio: pd.Series = pd.Series()
+        self.Daily_Return_Ratio_Log: pd.Series = pd.Series()
 
-        self.Sum_Return_Ratio = self.sum_return_ratio(price_list)
-        self.Max_Draw_Down = self.max_draw_down(price_list)
-        self.Sharpe_Ratio = self.sharpe_ratio(price_list)
-        self.Information_Ratio = self.information_ratio(price_list)
-        self.Treynor_Ratio = self.treynor_ratio(price_list)
+        self.Sum_Return_Ratio: np.float64 = None
+        self.Max_Draw_Down: np.float64 = None
+        self.Sharpe_Ratio: np.float64 = None
+        self.Information_Ratio: np.float64 = None
+        self.Treynor_Ratio: np.float64 = None
         
-        self.Stock_Returns = pd.DataFrame({
-            'Close': price_list,
-            'Returns': self.daily_return_ratio,
-            'Log_Returns': self.daily_return_ratio_log
-        })
-        self.Stock_Ratio = dict(
-            Sum_Return_Ratio=self.sum_return_ratio,
-            Max_Draw_Down=self.max_draw_down,
-            Sharpe_Ratio=self.sharpe_ratio,
-            Information_Ratio=self.information_ratio,
-            Treynor_Ratio=self.treynor_ratio
-        )
-
+        self.Stock_Returns: pd.DataFrame = pd.DataFrame()
+        self.Stock_Ratio: dict = {}
+        
+        if price_list is not None:
+            self.bind(price_list)
+        
     def sample(self):
         """
         价格列表数据分析示例，默认以阿里巴巴的收盘价格序列为例计算相关参数
         """
-        price_list = self.price_list
         from importlib.resources import files
         from importlib.resources.abc import Traversable
-        if price_list is None:
+        try:
             # 定位样例BABA的数据文件（适配安装后的路径）
-            print(files("ok_finda"))
-            data_dir: Traversable = files("ok_finda") / "data"
+            data_dir: Traversable = files("okfinance") / "data"
             csv_path: Traversable = data_dir / "stock_BABA.csv"
             print(csv_path)
             price_list = pd.read_csv(csv_path)['Close']
-            self.Daily_Return_Ratioaily_return_ratio = self.daily_return_ratio(price_list)
+            self.Daily_Return_Ratio = self.daily_return_ratio(price_list)
             self.Daily_Return_Ratio_Log = self.daily_return_ratio_log(price_list)
             self.Sum_Return_Ratio = self.sum_return_ratio(price_list)
             self.Max_Draw_Down = self.max_draw_down(price_list)
             self.Sharpe_Ratio = self.sharpe_ratio(price_list)
             self.Information_Ratio = self.information_ratio(price_list)
             self.Treynor_Ratio = self.treynor_ratio(price_list)
+                
+            print('收益率: daily_return_ratio():',self.Daily_Return_Ratio)
+            print('对数收益率: daily_return_ratio_log():',self.Daily_Return_Ratio_Log)
+            print('实际总收益率: sum_return_ratio():',self.Sum_Return_Ratio)
+            print('最大回撤率: max_draw_down():',self.Max_Draw_Down)
+            print('夏普比率: sharpe_ratio(rf=0.000041):',self.Sharpe_Ratio) 
+            print('信息比率: information_ratio(rf=0.000041):',self.Information_Ratio)
+            print('特雷诺比率: treynor_ratio(beta=1,rf=0.000041):',self.Treynor_Ratio) 
             
-        print('Close/Returns/Log_Returns of BABA:\n', self.stock_data_returns)
-        print('收益率/对数收益率/实际总收益率/最大回撤率/夏普比率/信息比率/特雷诺比率 of BABA:\n', self.stock_data_ratio)
-        
-        print('收益率: daily_return_ratio():',self.Daily_Return_Ratio)
-        print('对数收益率: daily_return_ratio_log():',self.Daily_Return_Ratio_Log)
-        print('实际总收益率: sum_return_ratio():',self.Sum_Return_Ratio)
-        print('最大回撤率: max_draw_down():',self.Max_Draw_Down)
-        print('夏普比率: sharpe_ratio(rf=0.000041):',self.Sharpe_Ratio) 
-        print('信息比率: information_ratio(rf=0.000041):',self.Information_Ratio)
-        print('特雷诺比率: treynor_ratio(beta=1,rf=0.000041):',self.Treynor_Ratio)  
+            self.Stock_Returns = pd.DataFrame({
+                'Close': price_list,
+                'Returns': self.Daily_Return_Ratio,             
+                'Log_Returns': self.Daily_Return_Ratio_Log
 
+            })
+            self.Stock_Ratio = dict(
+                Sum_Return_Ratio=self.Sum_Return_Ratio,
+                Max_Draw_Down=self.Max_Draw_Down,
+                Sharpe_Ratio=self.Sharpe_Ratio,
+                Information_Ratio=self.Information_Ratio,
+                Treynor_Ratio=self.Treynor_Ratio
+            )
+            return True
+        except Exception as e:
+            print(e)
+            return False
+
+    def bind(self, price_list: pd.Series, *args, **kwargs):
+        """
+        :param price_list: 股票价格序列
+        """
+        try:
+            self.price_list = price_list
+            self.Daily_Return_Ratio = self.daily_return_ratio(price_list)
+            self.Daily_Return_Ratio_Log = self.daily_return_ratio_log(price_list)
+
+            self.Sum_Return_Ratio = self.sum_return_ratio(price_list)
+            self.Max_Draw_Down = self.max_draw_down(price_list)
+            self.Sharpe_Ratio = self.sharpe_ratio(price_list)
+            self.Information_Ratio = self.information_ratio(price_list)
+            self.Treynor_Ratio = self.treynor_ratio(price_list)
+            
+            self.Stock_Returns = pd.DataFrame({
+                'Close': price_list,
+                'Returns': self.daily_return_ratio,
+                'Log_Returns': self.daily_return_ratio_log
+            })
+            self.Stock_Ratio = dict(
+                Sum_Return_Ratio=self.Sum_Return_Ratio,
+                Max_Draw_Down=self.Max_Draw_Down,
+                Sharpe_Ratio=self.Sharpe_Ratio,
+                Information_Ratio=self.Information_Ratio,
+                Treynor_Ratio=self.Treynor_Ratio
+            )
+            return True
+        except Exception as e:
+            print(e)
+            return False
+        
     @classmethod
     def daily_return_ratio(self, price_list):
         '''每日收益率'''

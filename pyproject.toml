@@ -3,9 +3,9 @@ requires = ["setuptools>=61.0"]  # 打包依赖
 build-backend = "setuptools.build_meta"  # 构建后端
 
 [project]
-name = "OK_FinDA"
-version = "0.1.6"
-description = "financial data analysis by okwords.cn"
+name = "okfinance"
+version = "0.2.0"
+description = "financial data analysis by brice."
 readme = "README.md"
 requires-python = ">=3.13.5"
 dependencies = [
@@ -27,10 +27,3 @@ dependencies = [
 
 [tool.setuptools.package-data]
 ok_finda = ["data/*.csv","data/*.pkl"]
-
-[[tool.uv.index]]
-url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"
-default = true
-
-[tool.uv.pip]
-index-url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"

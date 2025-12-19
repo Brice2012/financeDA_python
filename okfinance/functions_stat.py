@@ -5,7 +5,7 @@ import pandas as pd
 import scipy.stats as scs
 
 # 函数定义：为几何布朗运动生成蒙特卡洛路径
-def gen_paths(S0, r, sigma, T, M, I):
+def stat_gen_paths(S0, r, sigma, T, M, I):
     dt = float(T) / M
     paths = np.zeros((M + 1, I), np.float64)
     paths[0] = S0
@@ -29,8 +29,8 @@ def stat_describe(array):
     print("%14s %15.5f" % ('skew', sta[4]))
     print("%14s %15.5f" % ('kurtosis', sta[5]))
     
-###自定义正态分布检验函数
-def normality_tests(arr):
+###自定义正态分布检验函数 normality_tests
+def stat_norm_tests(arr):
     print("Skew of data set  %14.3f" % scs.skew(arr))
     print("Skew test p-value %14.3f" % scs.skewtest(arr)[1])
     print("Kurt of data set  %14.3f" % scs.kurtosis(arr))
