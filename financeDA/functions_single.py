@@ -1,5 +1,12 @@
+# ##################################################
+# okfinance package 2.0
+# Financial Data Analysis
+# 金融数据分析
+# Author: YeJunjie (Brice)
+# E_Mail: ye@okwords.cn
+# Date: 2025-12-20
+# ####################################################
 
-#%%
 ### 完整的单只股票历史数据分析过程
 import numpy as np
 import matplotlib.pyplot as plt

@@ -3,8 +3,8 @@ requires = ["setuptools>=61.0"]  # 打包依赖
 build-backend = "setuptools.build_meta"  # 构建后端
 
 [project]
-name = "okfinance"
-version = "0.2.0"
+name = "financeDA"
+version = "0.2.2"
 description = "financial data analysis by brice."
 readme = "README.md"
 requires-python = ">=3.13.5"

@@ -1,6 +1,14 @@
-### ch8. 风险测度 Risk Measures
-# 8.1 风险价值 Value-at-Risk 计算
-# 8.2 信用价值调整 Credit Value Adjustments
+# ##################################################
+# okfinance package 2.0
+# Financial Data Analysis - Risk Measures
+# 金融数据分析 - 风险测度 
+# Author: YeJunjie (Brice)
+# E_Mail: ye@okwords.cn
+# Date: 2025-12-20
+# ####################################################
+# 
+# 风险价值 Value-at-Risk 计算
+# 信用价值调整 Credit Value Adjustments
 
 # 导入需要的包
 import matplotlib.pyplot as plt

@@ -2,8 +2,9 @@
 # okfinance package 2.0
 # Financial Data Analysis - Portfolio Optimization
 # 金融数据分析 - 投资组合优化
-# Author: ye@okwords.cn
-# Date: 2025-12-17
+# Author: YeJunjie (Brice)
+# E_Mail: ye@okwords.cn
+# Date: 2025-12-20
 # ####################################################
 
 # 投资组合优化

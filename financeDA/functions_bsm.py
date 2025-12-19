@@ -1,4 +1,12 @@
-#
+# ##################################################
+# okfinance package 2.0
+# Financial Data Analysis
+# 金融数据分析
+# Author: YeJunjie (Brice)
+# E_Mail: ye@okwords.cn
+# Date: 2025-12-20
+# ####################################################
+
 # Valuation of European call options in Black-Scholes-Merton model
 # incl. Vega function and implied volatility estimation
 # bsm_functions.py
